@@ -1,0 +1,71 @@
+:root {
+    --main-text-color: #03191E;
+    --card-body-color: #DAE3E5;
+    --card-footer-header: #A1C6EA;
+    --card-color-one: #BBD1EA;
+    --card-color-two: #507DBC;
+    --card-color-three: #D3A588;
+    --input-field-color: #D7E8BA;
+}
+
+body {
+    background-color: #EDF7B5;
+}
+
+#submit-button {
+    background-color: var(--main-text-color);
+    color: var(--card-body-color);
+}
+
+#submit-button:hover {
+    background-color: var(--card-body-color);
+    color: var(--main-text-color);
+}
+
+.card-footer, .card-header {
+    background-color: var(--card-footer-header);
+}
+
+.card-body {
+    background-color: var(--card-body-color);
+    color: var(--main-text-color);
+}
+
+input[type="date"], input[type="text"], input[type="number"], input[type="email"], input[type="password"] {
+    background-color: var(--input-field-color);
+}
+
+input[type="date"]:focus, input[type="text"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+    background-color: #C9C19F;
+}
+
+.input-group-text {
+    background-color: #EFD09E;
+}
+
+.card-body {
+    background-color: var(--card-color-one);
+    color: var(--main-text-color);
+}
+
+.booking-widget {
+    opacity: 0.8;
+}
+
+#first-section {
+    background-color: #706c6c;
+    padding: 20px;
+    margin-bottom: 80%;
+    margin-top: 5%;
+}
+
+.vh-33 {
+    background: var(--card-color-two);
+    height: 50vh;
+}
+
+#results-response {
+    background-color: var(--card-color-three);
+    padding: 20px;
+    margin-top: 5%;
+}
