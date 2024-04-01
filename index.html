@@ -81,11 +81,11 @@
                     </div>
                     <div class="card-body">
                         <div class="input-group">
-                            <span class="input-group-text">Chose your date</span>
+                            <span class="input-group-text">Arrival & Departure</span>
                             <label for="start_date" hidden></label>
-                            <input type="text" class="form-control" id="start_date">
+                            <input type="text" class="form-control text-center" id="start_date">
                             <label for="end_date" hidden></label>
-                            <input type="text" class="form-control" id="end_date">
+                            <input type="text" class="form-control text-center" id="end_date">
                         </div>
                         <div class="btn-group mt-3" role="group" aria-label="Picking Your Room">
                             <input type="radio" class="btn-check" name="btnradio" id="button-single-room"
@@ -105,7 +105,8 @@
                                 Lisa</label>
                         </div>
                         <div class="mt-3">
-                            <button class="btn btn-outline-dark" id="submit-button">Submit</button>
+                            <button class="btn btn-outline-dark" id="submit-button">Book Room</button>
+                            <button class="btn btn-outline-dark" id="cancel-button">Cancel Room</button>
                         </div>
                     </div>
                     <div class="card-footer text-body-secondary" id="date-select">
@@ -115,7 +116,8 @@
             </div>
         </div>
         <!-- section 3 -->
-        <div class="row justify-content-center align-items-center vh-100" style="background-image: url('static/img/clouds.jpg'); background-size: cover; background-position: center; overflow: hidden;">
+        <div class="row justify-content-center align-items-center vh-100"
+             style="background-image: url('static/img/clouds.jpg'); background-size: cover; background-position: center; overflow: hidden;">
             <div class="col-md">
                 <div class="card shadow-lg" id="room-image">
                     <img src="static/img/hotel-room-one.webp" class="img-fluid" alt="room">
@@ -125,7 +127,7 @@
                 <div class="card mb-5 shadow-lg" id="single-room">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 m-0 p-0">
                                 <img src="static/img/hotel-room-one.webp" class="img-fluid" alt="Single Room">
                             </div>
                             <div class="col-md-6">
@@ -137,7 +139,7 @@
                                 <p>
                                     <strong>Price:</strong> $100 per night
                                 </p>
-                                <button class="btn btn-outline-dark mt-5">Book Now</button>
+                                <button class="btn btn-outline-dark mt-5" id="single-room-card-button">Book Now</button>
                             </div>
                         </div>
                     </div>
@@ -145,19 +147,19 @@
                 <div class="card shadow-lg" id="double-room">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6">
-                                <img src="static/img/hotel-room-one.webp" class="img-fluid" alt="Single Room">
+                            <div class="col-md-6 m-0 p-0">
+                                <img src="static/img/hotel-room-two.webp" class="img-fluid" alt="Double Room">
                             </div>
                             <div class="col-md-6">
-                                <h3>Single Room</h3>
+                                <h3>Double Room</h3>
                                 <p>
-                                    The single room is perfect for the solo traveler. It comes with a single bed, a
-                                    bathroom, and a small kitchenette.
+                                    This is the deluxe package. It includes a bed, a bathroom, a TV, and a balcony. It's
+                                    perfect for a longer stay.
                                 </p>
                                 <p>
                                     <strong>Price:</strong> $100 per night
                                 </p>
-                                <button class="btn btn-outline-dark mt-5">Book Now</button>
+                                <button class="btn btn-outline-dark mt-5" id="double-room-card-button">Book Now</button>
                             </div>
                         </div>
                     </div>
@@ -165,8 +167,8 @@
                 <div class="card mt-5 shadow-lg" id="mona-lisa-room">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6">
-                                <img src="static/img/hotel-room-one.webp" class="img-fluid" alt="Single Room">
+                            <div class="col-md-6 m-0 p-0">
+                                <img src="static/img/hotel-room-three.webp" class="img-fluid" alt="Single Room">
                             </div>
                             <div class="col-md-6">
                                 <h3>Single Room</h3>
@@ -177,7 +179,7 @@
                                 <p>
                                     <strong>Price:</strong> $100 per night
                                 </p>
-                                <button class="btn btn-outline-dark mt-5">Book Now</button>
+                                <button class="btn btn-outline-dark mt-5" id="mona-lisa-room-card-button">Book Now</button>
                             </div>
                         </div>
                     </div>
