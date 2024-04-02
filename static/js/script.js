@@ -31,6 +31,20 @@ $("#register-submit-btn").on("click", (event) => {
     }
 });
 
+const verifyForm = () => {
+    const registerForm = document.getElementById('register-user-form');
+
+    if (registerForm.checkValidity()) {
+        console.log('Form is valid');
+        $('#login-modal').modal('hide');
+        return true;
+    } else {
+        console.log('Form is invalid');
+        return false;
+    }
+
+}
+
 const greetUser = (firstName, lastName) => {
     $("#greet-user").html(`Welcome, ${firstName} ${lastName}!`);
 }
@@ -731,21 +745,6 @@ const buildHotelRooms = () => {
             scrollTop: $("#section2").offset().top
         });
     });
-}
-
-const verifyForm = () => {
-    const registerForm = document.getElementById('register-user-form');
-
-    if (registerForm.checkValidity()) {
-        console.log('Form is valid');
-        $('#login-modal').modal('hide');
-        $('#login-button').text('Logout').removeClass('btn-outline-light').addClass('btn-danger');
-        return true;
-    } else {
-        console.log('Form is invalid');
-        return false;
-    }
-
 }
 
 const clearInvalidInputs = () => {

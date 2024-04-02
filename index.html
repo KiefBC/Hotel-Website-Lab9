@@ -30,7 +30,7 @@
                         <input type="text" class="form-control" id="first-name" placeholder="Enter your first name..."
                                required pattern="^[A-Za-z]+$">
                         <div class="valid-feedback text-center">Valid.</div>
-                        <div class="invalid-feedback text-center">Please fill out this field.</div>
+                        <div class="invalid-feedback text-center">Only Characters Allowed.</div>
                     </div>
                     <div class="mb-3 input-group">
                         <label for="last-name" class="form-label" hidden>Last Name</label>
@@ -44,7 +44,7 @@
                         <input type="text" class="form-control" id="last-name" placeholder="Enter your last name..."
                                required pattern="^[A-Za-z]+$">
                         <div class="valid-feedback text-center">Valid.</div>
-                        <div class="invalid-feedback text-center">Please fill out this field.</div>
+                        <div class="invalid-feedback text-center">Only Characters Allowed.</div>
                     </div>
                     <div class="mb-3 input-group">
                         <label for="age" class="form-label" hidden>Age</label>
@@ -57,7 +57,7 @@
                         <input type="number" class="form-control" id="age" placeholder="Enter your age..." required
                                min="0" max="120">
                         <div class="valid-feedback text-center">Valid.</div>
-                        <div class="invalid-feedback text-center">Please fill out this field.</div>
+                        <div class="invalid-feedback text-center">Only Numbers Allowed.</div>
                     </div>
                     <div class="mb-3 input-group">
                         <label for="email" class="form-label" hidden>Email address</label>
@@ -71,7 +71,7 @@
                         <input type="email" class="form-control" id="email" placeholder="Enter your email..." required
                                pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
                         <div class="valid-feedback text-center">Valid.</div>
-                        <div class="invalid-feedback text-center">Please fill out this field.</div>
+                        <div class="invalid-feedback text-center">Example: noone@email.com</div>
                     </div>
                     <div class="mb-3 input-group">
                         <label for="postal-code" class="form-label" hidden>Postal Code</label>
@@ -84,7 +84,7 @@
                         <input type="text" class="form-control" id="postal-code" placeholder="Enter your postal..."
                                required pattern="^[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d$">
                         <div class="valid-feedback text-center">Valid.</div>
-                        <div class="invalid-feedback text-center">Please fill out this field.</div>
+                        <div class="invalid-feedback text-center">Follow Canadian Postal Codes. Example: V0S1N0</div>
                     </div>
                     <div class="mb-3 input-group">
                         <label for="phone-number" class="form-label" hidden>Phone Number</label>
@@ -98,7 +98,7 @@
                                placeholder="Enter your phone number..." required
                                pattern="^(?:\d{3}-\d{3}-\d{4}|\d{10}|\d{3} \d{3} \d{4})$">
                         <div class="valid-feedback text-center">Valid.</div>
-                        <div class="invalid-feedback text-center">Please fill out this field.</div>
+                        <div class="invalid-feedback text-center">Example: 255-222-2222</div>
                     </div>
                 </form>
                 <div class="d-flex flex-column justify-content-center mb-3" id="register-response">
@@ -194,6 +194,7 @@
             </div>
             <!-- widget -->
             <div class="col-md-8 position-relative">
+                <!-- widget goes here for openweather -->
             </div>
         </div>
         <!-- section 2 -->
