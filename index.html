@@ -9,33 +9,145 @@
     <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
+<!-- modal -->
+<div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="login-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="register-user-form" class="was-validated" novalidate>
+                    <div class="mb-3 input-group">
+                        <label for="first-name" class="form-label" hidden>First Name</label>
+                        <span class="input-group-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-person-standing" viewBox="0 0 16 16">
+                                    <path d="M8 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M6 6.75v8.5a.75.75 0 0 0 1.5 0V10.5a.5.5 0 0 1 1 0v4.75a.75.75 0 0 0 1.5 0v-8.5a.25.25 0 1 1 .5 0v2.5a.75.75 0 0 0 1.5 0V6.5a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v2.75a.75.75 0 0 0 1.5 0v-2.5a.25.25 0 0 1 .5 0"/>
+                                </svg>
+                            </span>
+                        <input type="text" class="form-control" id="first-name" placeholder="Enter your first name..."
+                               required pattern="^[A-Za-z]+$">
+                        <div class="valid-feedback text-center">Valid.</div>
+                        <div class="invalid-feedback text-center">Please fill out this field.</div>
+                    </div>
+                    <div class="mb-3 input-group">
+                        <label for="last-name" class="form-label" hidden>Last Name</label>
+                        <span class="input-group-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-person-walking" viewBox="0 0 16 16">
+                                  <path d="M9.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0M6.44 3.752A.75.75 0 0 1 7 3.5h1.445c.742 0 1.32.643 1.243 1.38l-.43 4.083a1.8 1.8 0 0 1-.088.395l-.318.906.213.242a.8.8 0 0 1 .114.175l2 4.25a.75.75 0 1 1-1.357.638l-1.956-4.154-1.68-1.921A.75.75 0 0 1 6 8.96l.138-2.613-.435.489-.464 2.786a.75.75 0 1 1-1.48-.246l.5-3a.75.75 0 0 1 .18-.375l2-2.25Z"/>
+                                  <path d="M6.25 11.745v-1.418l1.204 1.375.261.524a.8.8 0 0 1-.12.231l-2.5 3.25a.75.75 0 1 1-1.19-.914zm4.22-4.215-.494-.494.205-1.843.006-.067 1.124 1.124h1.44a.75.75 0 0 1 0 1.5H11a.75.75 0 0 1-.531-.22Z"/>
+                                </svg>
+                            </span>
+                        <input type="text" class="form-control" id="last-name" placeholder="Enter your last name..."
+                               required pattern="^[A-Za-z]+$">
+                        <div class="valid-feedback text-center">Valid.</div>
+                        <div class="invalid-feedback text-center">Please fill out this field.</div>
+                    </div>
+                    <div class="mb-3 input-group">
+                        <label for="age" class="form-label" hidden>Age</label>
+                        <span class="input-group-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-lungs-fill" viewBox="0 0 16 16">
+                                  <path d="M8 1a.5.5 0 0 1 .5.5v5.243L9 7.1V4.72C9 3.77 9.77 3 10.72 3c.524 0 1.023.27 1.443.592.431.332.847.773 1.216 1.229.736.908 1.347 1.946 1.58 2.48.176.405.393 1.16.556 2.011.165.857.283 1.857.24 2.759-.04.867-.232 1.79-.837 2.33-.67.6-1.622.556-2.741-.004l-1.795-.897A2.5 2.5 0 0 1 9 11.264V8.329l-1-.715-1 .715V7.214c-.1 0-.202.03-.29.093l-2.5 1.786a.5.5 0 1 0 .58.814L7 8.329v2.935A2.5 2.5 0 0 1 5.618 13.5l-1.795.897c-1.12.56-2.07.603-2.741.004-.605-.54-.798-1.463-.838-2.33-.042-.902.076-1.902.24-2.759.164-.852.38-1.606.558-2.012.232-.533.843-1.571 1.579-2.479.37-.456.785-.897 1.216-1.229C4.257 3.27 4.756 3 5.28 3 6.23 3 7 3.77 7 4.72V7.1l.5-.357V1.5A.5.5 0 0 1 8 1m3.21 8.907a.5.5 0 1 0 .58-.814l-2.5-1.786A.5.5 0 0 0 9 7.214V8.33z"/>
+                                </svg>
+                            </span>
+                        <input type="number" class="form-control" id="age" placeholder="Enter your age..." required
+                               min="0" max="120">
+                        <div class="valid-feedback text-center">Valid.</div>
+                        <div class="invalid-feedback text-center">Please fill out this field.</div>
+                    </div>
+                    <div class="mb-3 input-group">
+                        <label for="email" class="form-label" hidden>Email address</label>
+                        <span class="input-group-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-postcard-fill" viewBox="0 0 16 16">
+                                  <path d="M11 8h2V6h-2z"/>
+                                  <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm8.5.5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0zM2 5.5a.5.5 0 0 0 .5.5H6a.5.5 0 0 0 0-1H2.5a.5.5 0 0 0-.5.5M2.5 7a.5.5 0 0 0 0 1H6a.5.5 0 0 0 0-1zM2 9.5a.5.5 0 0 0 .5.5H6a.5.5 0 0 0 0-1H2.5a.5.5 0 0 0-.5.5m8-4v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5"/>
+                                </svg>
+                            </span>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email..." required
+                               pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
+                        <div class="valid-feedback text-center">Valid.</div>
+                        <div class="invalid-feedback text-center">Please fill out this field.</div>
+                    </div>
+                    <div class="mb-3 input-group">
+                        <label for="postal-code" class="form-label" hidden>Postal Code</label>
+                        <span class="input-group-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-fuel-pump-fill" viewBox="0 0 16 16">
+                                  <path d="M1 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v8a2 2 0 0 1 2 2v.5a.5.5 0 0 0 1 0V8h-.5a.5.5 0 0 1-.5-.5V4.375a.5.5 0 0 1 .5-.5h1.495c-.011-.476-.053-.894-.201-1.222a.97.97 0 0 0-.394-.458c-.184-.11-.464-.195-.9-.195a.5.5 0 0 1 0-1q.846-.002 1.412.336c.383.228.634.551.794.907.295.655.294 1.465.294 2.081V7.5a.5.5 0 0 1-.5.5H15v4.5a1.5 1.5 0 0 1-3 0V12a1 1 0 0 0-1-1v4h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1zm2.5 0a.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 .5-.5v-5a.5.5 0 0 0-.5-.5z"/>
+                                </svg>
+                            </span>
+                        <input type="text" class="form-control" id="postal-code" placeholder="Enter your postal..."
+                               required pattern="^[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d$">
+                        <div class="valid-feedback text-center">Valid.</div>
+                        <div class="invalid-feedback text-center">Please fill out this field.</div>
+                    </div>
+                    <div class="mb-3 input-group">
+                        <label for="phone-number" class="form-label" hidden>Phone Number</label>
+                        <span class="input-group-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-reception-4" viewBox="0 0 16 16">
+                                  <path d="M0 11.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5z"/>
+                                </svg>
+                            </span>
+                        <input type="tel" class="form-control" id="phone-number"
+                               placeholder="Enter your phone number..." required
+                               pattern="^(?:\d{3}-\d{3}-\d{4}|\d{10}|\d{3} \d{3} \d{4})$">
+                        <div class="valid-feedback text-center">Valid.</div>
+                        <div class="invalid-feedback text-center">Please fill out this field.</div>
+                    </div>
+                </form>
+                <div class="d-flex flex-column justify-content-center mb-3" id="register-response">
+                </div>
+                <p>Form Will Keep Correct Values</p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="register-submit-btn">Register</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close-modal-button">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- header -->
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="d-flex text-white bg-dark" id="greet-user">
+                <!-- Greet User Here -->
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
+                    aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
-                    </li>
-                </ul>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+                 aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Dark offcanvas</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#login-modal"
+                                    id="login-button">Login
+                            </button>
+                        </li>
+                    </ul>
+                    <div id="user-profile">
+                        <!-- user profile -->
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -52,7 +164,7 @@
                     <p class="text-white">Bootstrap is a free and open-source CSS framework directed at responsive,
                         mobile-first front-end web development. It contains CSS- and JavaScript-based design templates
                         for typography, forms, buttons, navigation, and other interface components.</p>
-                    <button class="btn btn-light">Click Me</button>
+                    <button class="btn btn-light" id="section-one-button">Book now!</button>
                 </div>
             </div>
             <!-- widget -->
@@ -60,7 +172,10 @@
             </div>
         </div>
         <!-- section 2 -->
-        <div class="row justify-content-center align-items-center vh-33">
+        <div class="row justify-content-center align-items-center vh-100" id="section2">
+            <video autoplay loop muted id="section2-vid" class="object-fit-fill m-0 p-0">
+                <source src="static/vid/pool.mp4" type="video/mp4">
+            </video>
             <!-- response -->
             <div class="col-md mb-5" id="results-response">
                 <h1>Please Book Here</h1>
@@ -107,6 +222,7 @@
                         <div class="mt-3">
                             <button class="btn btn-outline-dark" id="submit-button">Book Room</button>
                             <button class="btn btn-outline-dark" id="cancel-button">Cancel Room</button>
+                            <button class="btn btn-outline-dark" id="which-room-button">View Chosen Room</button>
                         </div>
                     </div>
                     <div class="card-footer text-body-secondary" id="date-select">
@@ -116,70 +232,79 @@
             </div>
         </div>
         <!-- section 3 -->
-        <div class="row justify-content-center align-items-center vh-100"
-             style="background-image: url('static/img/clouds.jpg'); background-size: cover; background-position: center; overflow: hidden;">
-            <div class="col-md">
-                <div class="card shadow-lg" id="room-image">
-                    <img src="static/img/hotel-room-one.webp" class="img-fluid" alt="room">
+        <div class="row justify-content-center align-items-center vh-100" id="section3">
+            <video autoplay loop muted id="section3-vid" class="object-fit-fill m-0 p-0">
+                <source src="static/vid/clouds.mp4" type="video/mp4">
+            </video>
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-4 text-center" id="section3-img">
+                    <div class="card shadow-lg" id="room-image">
+                        <img src="static/img/hotel-room-one.webp" class="img-fluid" alt="room">
+                    </div>
                 </div>
-            </div>
-            <div class="col-md text-center">
-                <div class="card mb-5 shadow-lg" id="single-room">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6 m-0 p-0">
-                                <img src="static/img/hotel-room-one.webp" class="img-fluid" alt="Single Room">
-                            </div>
-                            <div class="col-md-6">
-                                <h3>Single Room</h3>
-                                <p>
-                                    The single room is perfect for the solo traveler. It comes with a single bed, a
-                                    bathroom, and a small kitchenette.
-                                </p>
-                                <p>
-                                    <strong>Price:</strong> $100 per night
-                                </p>
-                                <button class="btn btn-outline-dark mt-5" id="single-room-card-button">Book Now</button>
+                <div class="col-md-4 text-center">
+                    <div class="card mb-5 shadow-lg" id="single-room">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md m-0 p-0">
+                                    <img src="static/img/hotel-room-one.webp" class="img-fluid" alt="Single Room">
+                                </div>
+                                <div class="col-md">
+                                    <h3>Single Room</h3>
+                                    <p>
+                                        The single room is perfect for the solo traveler. It comes with a single bed, a
+                                        bathroom, and a small kitchenette.
+                                    </p>
+                                    <p>
+                                        <strong>Price:</strong> $100 per night
+                                    </p>
+                                    <button class="btn btn-outline-dark mt-5" id="single-room-card-button">Book Now
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card shadow-lg" id="double-room">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6 m-0 p-0">
-                                <img src="static/img/hotel-room-two.webp" class="img-fluid" alt="Double Room">
-                            </div>
-                            <div class="col-md-6">
-                                <h3>Double Room</h3>
-                                <p>
-                                    This is the deluxe package. It includes a bed, a bathroom, a TV, and a balcony. It's
-                                    perfect for a longer stay.
-                                </p>
-                                <p>
-                                    <strong>Price:</strong> $100 per night
-                                </p>
-                                <button class="btn btn-outline-dark mt-5" id="double-room-card-button">Book Now</button>
+                    <div class="card shadow-lg" id="double-room">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 m-0 p-0">
+                                    <img src="static/img/hotel-room-two.webp" class="img-fluid" alt="Double Room">
+                                </div>
+                                <div class="col-md-6">
+                                    <h3>Double Room</h3>
+                                    <p>
+                                        This is the deluxe package. It includes a bed, a bathroom, a TV, and a balcony.
+                                        It's
+                                        perfect for a longer stay.
+                                    </p>
+                                    <p>
+                                        <strong>Price:</strong> $100 per night
+                                    </p>
+                                    <button class="btn btn-outline-dark mt-5" id="double-room-card-button">Book Now
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card mt-5 shadow-lg" id="mona-lisa-room">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6 m-0 p-0">
-                                <img src="static/img/hotel-room-three.webp" class="img-fluid" alt="Single Room">
-                            </div>
-                            <div class="col-md-6">
-                                <h3>Single Room</h3>
-                                <p>
-                                    The single room is perfect for the solo traveler. It comes with a single bed, a
-                                    bathroom, and a small kitchenette.
-                                </p>
-                                <p>
-                                    <strong>Price:</strong> $100 per night
-                                </p>
-                                <button class="btn btn-outline-dark mt-5" id="mona-lisa-room-card-button">Book Now</button>
+                    <div class="card mt-5 shadow-lg" id="mona-lisa-room">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 m-0 p-0">
+                                    <img src="static/img/hotel-room-three.webp" class="img-fluid" alt="Single Room">
+                                </div>
+                                <div class="col-md-6">
+                                    <h3>Monsa Lisa Room</h3>
+                                    <p>
+                                        The Mona Lisa is the ultimate room for the ultimate Claw. Once you stay here,
+                                        you
+                                        will never want to leave.
+                                    </p>
+                                    <p>
+                                        <strong>Price:</strong> $100 per night
+                                    </p>
+                                    <button class="btn btn-outline-dark mt-5" id="mona-lisa-room-card-button">Book Now
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -196,7 +321,7 @@
 </footer>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="static/js/script.js"></script>
 </body>

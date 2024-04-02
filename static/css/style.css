@@ -9,7 +9,6 @@
 }
 
 body {
-    background-color: #EDF7B5;
 }
 
 #submit-button {
@@ -53,14 +52,13 @@ input[type="date"]:focus, input[type="text"]:focus, input[type="number"]:focus, 
 }
 
 #first-section {
-    background-color: #706c6c;
+    /*background-color: #706c6c;*/
     padding: 20px;
     margin-bottom: 80%;
     margin-top: 5%;
 }
 
 .vh-33 {
-    background: var(--card-color-two);
     height: 50vh;
 }
 
@@ -68,4 +66,65 @@ input[type="date"]:focus, input[type="text"]:focus, input[type="number"]:focus, 
     background-color: var(--card-color-three);
     padding: 20px;
     margin-top: 5%;
+}
+
+/* Force the navbar to stay collapsed */
+.navbar-collapse {
+    display: none;
+}
+
+/* When toggled, align the menu to the right */
+.navbar-collapse.collapsing,
+.navbar-collapse.show {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%; /* or use a specific width like 300px */
+    height: 100%; /* full height */
+    background-color: white; /* or any other background color */
+    z-index: 1050; /* Ensures it's above other content */
+}
+
+#section2 {
+    position: relative;
+    overflow: hidden;
+    /*--bs-gutter-x: 0;*/
+    /*padding: 0;*/
+    /*margin: 0;*/
+    height: 100vh;
+}
+
+#section2-vid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+#section3 {
+    position: relative;
+    overflow: hidden;
+    /*--bs-gutter-x: 0;*/
+    /*padding: 0;*/
+    /*margin: 0;*/
+}
+
+#section3-vid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.card img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
 }

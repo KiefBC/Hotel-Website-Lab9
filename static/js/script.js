@@ -1,5 +1,5 @@
 //<editor-fold desc="Widget">
-const initializeSeafloor = () => {
+const initializeDatePickers = () => {
     let defaultStartDate = new Date();
     let defaultEndDate = new Date();
     defaultEndDate.setDate(defaultStartDate.getDate() + 1);
@@ -14,19 +14,19 @@ const initializeSeafloor = () => {
                 // Set the minDate of the end date datepicker to the day after the selected start date
                 $('#end_date').datepicker('option', 'minDate', minEndDate);
 
-                announceLobster();
+                calculateStayLength();
             }
         }).datepicker('setDate', defaultStartDate);
 
         $('#end_date').datepicker({
             minDate: 1,
             defaultDate: defaultEndDate,
-            onSelect: announceLobster
+            onSelect: calculateStayLength
         }).datepicker('setDate', defaultEndDate);
     });
 }
 
-const announceLobster = () => {
+const calculateStayLength = () => {
     let dayPlural;
 
     let startDate = new Date($('#start_date').datepicker('getDate'));
@@ -45,10 +45,9 @@ const announceLobster = () => {
     `);
 }
 
-const letsGo = () => {
+const initializeWidget = () => {
     console.log("\nInitiating Widget...\n");
-    initializeSeafloor();
-    specialLobster();
+    initializeDatePickers();
 
     $("#submit-button").on("click", () => {
         let start_date = $("#start_date").val();
@@ -56,32 +55,6 @@ const letsGo = () => {
         let radioValue = $("input[name='btnradio']:checked").attr("id");
 
         buildShell(start_date, end_date, radioValue);
-    });
-};
-
-const specialLobster = () => {
-    $(".btn-group").click((event) => {
-        let cssRootVariable;
-
-        switch (event.target.id) {
-            case "button-single-room":
-                cssRootVariable = '--card-color-one';
-                break;
-            case "button-double-room":
-                cssRootVariable = '--card-color-two';
-                break;
-            case "button-mona-lisa":
-                cssRootVariable = '--card-color-three';
-                break;
-        }
-
-        if (cssRootVariable) {
-            let newColor = $(':root').css(cssRootVariable);
-            $(".card-body").animate(
-                { backgroundColor: newColor },
-                500
-            );
-        }
     });
 };
 
@@ -114,5 +87,136 @@ const buildShell = (start_date, end_date, radioValue) => {
     }
 };
 
-letsGo();
+initializeWidget();
 //</editor-fold>
+
+let userLogin = false;
+const hotelRooms = [{
+    title: "Standard Package",
+    description: "This is our standard package. It includes a bed, a bathroom, and a TV. It's perfect for a short stay.",
+    price: "$100",
+    imgRef: "static/img/hotel-room-one.webp"
+}, {
+    title: "Deluxe Package",
+    description: "This is the deluxe package. It includes a bed, a bathroom, a TV, and a balcony. It's perfect for a longer stay.",
+    price: "$200",
+    imgRef: "static/img/hotel-room-two.webp"
+}, {
+    title: "Suite Package",
+    description: "This is the suite package. It includes a bed, a bathroom, a TV, a balcony, and a kitchen. It's perfect for a forever stay.",
+    price: "$300",
+    imgRef: "static/img/hotel-room-three.webp"
+}];
+
+$("#section-one-button").on("click", (e) => {
+    e.preventDefault();
+    $('html, body').animate({
+        scrollTop: $("#section2").offset().top
+    });
+});
+
+$("#login-button").on("click", (e) => {
+    $("#login-modal").modal("show");
+});
+
+$("#which-room-button").on("click", (e) => {
+    e.preventDefault();
+    $('html, body').animate({
+        // scroll to #single-room
+        scrollTop: $("#single-room").offset().top - 60
+    });
+});
+
+$("#register-submit-btn").on("click", (event) => {
+   clearInvalidInputs();
+
+    const $firstName = $('#first-name').val();
+    const $lastName = $('#last-name').val();
+    const $phoneNumber = $('#phone-number').val();
+    const $email = $('#email').val();
+    const $age = $('#age').val();
+    const $postalCode = $('#postal-code').val();
+
+    if (verifyForm()) {
+        userLogin = true;
+        greetUser($firstName, $lastName);
+        buildUserProfile($firstName, $lastName, $age, $phoneNumber, $postalCode, $email);
+    }
+});
+
+const greetUser = (firstName, lastName) => {
+    $("#greet-user").html(`Welcome, ${firstName} ${lastName}!`);
+}
+
+const buildUserProfile = (firstName, lastName, age, phone, address, email) => {
+    const userProfile = $("#user-profile");
+    userProfile.html(`
+        <div class="card mt-3">
+          <div class="card-header">
+            <h5 class="text-center mt-3">User Account</h5>
+          </div>
+            <div class="card-body py-1">
+                <div class="row" id="hotel-rooms-cards">
+                    <div class="col-md d-flex flex-column">
+                        <img src="static/img/portrait.jpg" class="img-fluid rounded-3" alt="face">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <p class="card-text text-center"><span class="fw-bolder fs-5">${firstName} ${lastName}</span><br><span class="text-warning fw-bolder">${email}</span></p>
+                            </li>
+                            <li class="list-group-item"><p class="card-text text-center">Age: <span class="text-danger fw-bold">${age}</span></p></li>
+                            <li class="list-group-item"><p class="card-text text-center">Postal Code: <span class="text-success fw-bold">${address}</span></p></li>
+                            <li class="list-group-item"><p class="card-text text-center">Phone: <span class="text-info fw-bold">${phone}</span></p></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `);
+}
+
+const verifyForm = () => {
+    const registerForm = document.getElementById('register-user-form');
+
+    if (registerForm.checkValidity()) {
+        console.log('Form is valid');
+        $('#login-modal').modal('hide');
+        $('#login-button').text('Logout').removeClass('btn-outline-light').addClass('btn-danger');
+        return true;
+    } else {
+        console.log('Form is invalid');
+        return false;
+    }
+
+}
+
+const clearInvalidInputs = () => {
+    const $firstName = $('#first-name');
+    if (!/^[A-Za-z]+$/.test($firstName.val())) {
+        $firstName.val('');
+    }
+
+    const $lastName = $('#last-name');
+    if (!/^[A-Za-z]+$/.test($lastName.val())) {
+        $lastName.val('');
+    }
+
+    const $phoneNumber = $('#phone-number');
+    if (!/^(?:\d{3}-\d{3}-\d{4}|\d{10}|\d{3} \d{3} \d{4})$/.test($phoneNumber.val())) {
+        $phoneNumber.val('');
+    }
+
+    const $email = $('#email');
+    if (!/[^@\s]+@[^@\s]+\.[^@\s]+/.test($email.val())) {
+        $email.val('');
+    }
+
+    const $age = $('#age');
+    if ($age.val() < 0 || $age.val() > 120) {
+        $age.val('');
+    }
+
+    const $postalCode = $('#postal-code');
+    if (!/^[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d$/.test($postalCode.val())) {
+        $postalCode.val('');
+    }
+};
