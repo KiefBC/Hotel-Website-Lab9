@@ -1,5 +1,6 @@
 //<editor-fold desc="Section 1">
 let userLogin = false;
+const hotelName = "Château de Mona Liséa";
 
 $("#login-button").on("click", (e) => {
     e.preventDefault();
@@ -200,7 +201,7 @@ const buildShell = (start_date, end_date, radioValue) => {
                     <li>Burger King</li>
                 </ul>
             </ul>
-            <button class="btn btn-outline-dark mt-5" id="book-standard">BOOK ROOM NOW!</button>
+            <button class="btn btn-light mt-5" id="book-standard">BOOK ROOM NOW!</button>
         `);
 
         cost = 100;
