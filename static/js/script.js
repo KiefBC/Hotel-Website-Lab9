@@ -15,7 +15,7 @@ $("#login-button").on("click", (e) => {
         checkBookingButtonUserLoggedIn();
     }
 });
-$("#register-submit-btn").on("click", (event) => {
+$("#register-submit-btn").on("click", () => {
     clearInvalidInputs();
 
     const $firstName = $('#first-name').val();
@@ -395,13 +395,13 @@ const buildShell = (start_date, end_date, radioValue) => {
             <p class="fw-bolder text-start text-decoration-underline">Our Services for the <span class="fw-bold">Standard Package</span>!</p>
             <ul class="list-unstyled text-start">
                 <li>Shuttle? <span class="fw-bold">NO!</span></li>
-                <li>Breakfast? <span class="fw-bold">NO!</span></li>
+                <li>Breakfast? <span class="fw-bold">YES!</span></li>
                 <li>Room Service? <span class="fw-bold">NO!</span></li>
                 <li>Restaurants? <span class="fw-bold">YES!</span></li>
                 <ul>
-                    <li>McDonalds</li>
-                    <li>Wendys</li>
-                    <li>Burger King</li>
+                    <li>Polo Del Taco</li>
+                    <li>Raw Rotisserie</li>
+                    <li>Fat BURGER</li>
                 </ul>
             </ul>
             <button class="btn btn-light mt-5" id="book-standard">BOOK ROOM NOW!</button>
@@ -565,14 +565,14 @@ const buildShell = (start_date, end_date, radioValue) => {
             <p>You have chosen a <span class="fw-bold">Single Room</span> which is our <span class="fw-bold">Standard Package</span>. You must be lonely. But don't worry, our services will keep you company!</p>
             <p class="fw-bolder text-start text-decoration-underline">Our Services for the <span class="fw-bold">Standard Package</span>!</p>
             <ul class="list-unstyled text-start">
-                <li>Shuttle? <span class="fw-bold">NO!</span></li>
-                <li>Breakfast? <span class="fw-bold">NO!</span></li>
-                <li>Room Service? <span class="fw-bold">NO!</span></li>
+                <li>Shuttle? <span class="fw-bold">YES!</span></li>
+                <li>Breakfast? <span class="fw-bold">YES!</span></li>
+                <li>Room Service? <span class="fw-bold">YES!</span></li>
                 <li>Restaurants? <span class="fw-bold">YES!</span></li>
                 <ul>
-                    <li>McDonalds</li>
-                    <li>Wendys</li>
-                    <li>Burger King</li>
+                    <li>The Keg</li>
+                    <li>Playa Del Tora</li>
+                    <li>Toucan Wings</li>
                 </ul>
             </ul>
             <button class="btn btn-light mt-5" id="book-standard">BOOK ROOM NOW!</button>

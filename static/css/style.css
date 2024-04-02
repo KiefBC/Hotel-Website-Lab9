@@ -101,7 +101,13 @@ h1, h2, h3 {
 }
 
 #section1-content {
-    background: var(--main-trans-color);
+    background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0),
+            var(--main-trans-color) 15%,
+            var(--main-trans-color) 85%,
+            rgba(255, 255, 255, 0)
+    );
     padding: 1em;
     color: var(--card-body-color);
 }
@@ -132,7 +138,13 @@ h1, h2, h3 {
 }
 
 #results-response {
-    background: var(--main-trans-color);
+    background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0),
+            var(--main-trans-color) 15%,
+            var(--main-trans-color) 85%,
+            rgba(255, 255, 255, 0)
+    );
     color: var(--card-color-three);
 }
 
@@ -173,6 +185,10 @@ h1, h2, h3 {
     #section3-content, #section3-room-description {
         flex-direction: column;
         width: 75%;
+    }
+
+    .row {
+        flex-direction: column;
     }
 }
 
