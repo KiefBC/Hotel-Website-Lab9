@@ -2,8 +2,10 @@
 let userLogin = false;
 const hotelName = "Château de Mona Liséa";
 
+//<editor-fold desc="Events">
 $("#login-button").on("click", (e) => {
     e.preventDefault();
+
     // if the text is login, show the modal else log the user out
     if ($("#login-button").text() === "Register") {
         $("#login-modal").modal("show");
@@ -25,20 +27,35 @@ $("#register-submit-btn").on("click", () => {
     const $age = $('#age').val();
     const $postalCode = $('#postal-code').val();
 
+    // Verify the form inputs
     if (verifyForm()) {
         userLogin = true;
         greetUser($firstName, $lastName);
         buildUserProfile($firstName, $lastName, $age, $phoneNumber, $postalCode, $email);
         $("#login-button").text("Logout").removeClass("btn-outline-light").addClass("btn-danger");
+        // User is logged in, clear the form inputs and check the booking button
         clearFormInputs();
         checkBookingButtonUserLoggedIn();
     }
 });
+$("#section-one-button").on("click", (e) => {
+    e.preventDefault();
 
+    // Scroll to the next section
+    $('html, body').animate({
+        scrollTop: $("#section2").offset().top
+    });
+});
+//</editor-fold>
+
+/**
+ * Verifies the form inputs and returns a boolean
+ * @returns {boolean} - true if the form is valid, false otherwise
+ */
 const verifyForm = () => {
-    const registerForm = document.getElementById('register-user-form');
+    const registerForm = $('#register-user-form');
 
-    if (registerForm.checkValidity()) {
+    if (registerForm[0].checkValidity()) {
         console.log('Form is valid');
         $('#login-modal').modal('hide');
         return true;
@@ -46,13 +63,26 @@ const verifyForm = () => {
         console.log('Form is invalid');
         return false;
     }
-
 }
 
+/**
+ * Greets the user with their first and last name in the Navbar
+ * @param firstName - The user's first name
+ * @param lastName - The user's last name
+ */
 const greetUser = (firstName, lastName) => {
-    $("#greet-user").html(`Welcome, ${firstName} ${lastName}!`);
+    $("#greet-user").html(`Welcome to ${hotelName}, ${capitalize(firstName)} ${capitalize(lastName)}!`);
 }
 
+/**
+ * Builds a user profile card with the user's information
+ * @param firstName - The user's first name
+ * @param lastName - The user's last name
+ * @param age - The user's age
+ * @param phone - The user's phone number
+ * @param address - The user's Postal Code
+ * @param email - The user's email
+ */
 const buildUserProfile = (firstName, lastName, age, phone, address, email) => {
     const userProfile = $("#user-profile");
     userProfile.html(`
@@ -79,13 +109,18 @@ const buildUserProfile = (firstName, lastName, age, phone, address, email) => {
     `);
 }
 
-$("#section-one-button").on("click", (e) => {
-    e.preventDefault();
-    $('html, body').animate({
-        scrollTop: $("#section2").offset().top
-    });
-});
+/**
+ * Takes in a string and capitalizes the first letter of each word
+ * @param str - The string to capitalize
+ * @returns {string} - The capitalized string
+ */
+const capitalize = (str) => {
+    return str.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+}
 
+/**
+ * Clears the inputs of the form
+ */
 const clearFormInputs = () => {
     $('#first-name').val('');
     $('#last-name').val('');
@@ -95,30 +130,66 @@ const clearFormInputs = () => {
     $('#postal-code').val('');
 
 }
+
+/**
+ * Clears all invalid inputs in the form and keeps the valid ones
+ */
+const clearInvalidInputs = () => {
+    const $firstName = $('#first-name');
+    if (!/^[A-Za-z]+$/.test($firstName.val())) {
+        $firstName.val('');
+    }
+
+    const $lastName = $('#last-name');
+    if (!/^[A-Za-z]+$/.test($lastName.val())) {
+        $lastName.val('');
+    }
+
+    const $phoneNumber = $('#phone-number');
+    if (!/^(?:\d{3}-\d{3}-\d{4}|\d{10}|\d{3} \d{3} \d{4})$/.test($phoneNumber.val())) {
+        $phoneNumber.val('');
+    }
+
+    const $email = $('#email');
+    if (!/[^@\s]+@[^@\s]+\.[^@\s]+/.test($email.val())) {
+        $email.val('');
+    }
+
+    const $age = $('#age');
+    if ($age.val() < 0 || $age.val() > 120) {
+        $age.val('');
+    }
+
+    const $postalCode = $('#postal-code');
+    if (!/^[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d$/.test($postalCode.val())) {
+        $postalCode.val('');
+    }
+}
 //</editor-fold>
 
 //<editor-fold desc="Weather Widget">
-const apiKey = `e1be3967c5f2d60263adc1ed3907d170`;
+const apiKey = `e1be3967c5f2d60263adc1ed3907d170`; // Don't steal!!! ;)
 const lat = 17.607788;
 const lon = 8.081666;
 const apiBaseUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
+/**
+ * Fetches the weather data from the OpenWeather API and updates the DOM
+ * @returns {Promise<void>} - A Promise that resolves when the weather data is fetched
+ */
 const getWeather = async () => {
     const response = await fetch(apiBaseUrl);
     const data = await response.json();
-    console.log(data);
 
-    const temp = data.main.temp;
+    const temp = data.main.temp; // Kelvin
+    // Convert the temperature from Kelvin to Celsius
     const tempC = Math.round(temp - 273.15);
     const weatherIcon = data.weather[0].icon;
-    const weatherDescription = data.weather[0].description;
-
-    //capitalize every word in the description
-    const weatherDescriptionCapitalized = weatherDescription.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+    const weatherDescription = capitalize(data.weather[0].description);
 
     $("#temperature").html(`${tempC}\u00B0`);
     $("#weather-icon").html(`<img src="https://openweathermap.org/img/w/${weatherIcon}.png" alt="Weather icon">`);
-    $("#weather").html(`${weatherDescriptionCapitalized}`);
+    $("#weather").html(`${weatherDescription}`);
 };
 
 getWeather().then(r => console.log("Weather Data Fetched Successfully!"));
@@ -126,15 +197,27 @@ getWeather().then(r => console.log("Weather Data Fetched Successfully!"));
 
 //<editor-fold desc="Section 2">
 
+//<editor-fold desc="Global Vars">
 let amountOfRooms;
 let userAmountOfRooms;
 let cost;
 let totalCost;
 let totalAvailableRooms;
+let dayPlural;
+//</editor-fold>
 
+$("#weather-button").on("click", () => {
+    refreshWeatherWidget();
+});
+
+/**
+ * Initializes the datepicker for the start and end date inputs
+ */
 const initializeDatePickers = () => {
+    // Get the current date and the date for tomorrow
     let defaultStartDate = new Date();
     let defaultEndDate = new Date();
+    // Set the end date to the day after the start date
     defaultEndDate.setDate(defaultStartDate.getDate() + 1);
 
     $(() => {
@@ -159,38 +242,48 @@ const initializeDatePickers = () => {
     });
 }
 
+/**
+ * Calculates the length of the stay based on the start and end date
+ */
 const calculateStayLength = () => {
-    let dayPlural;
 
     let startDate = new Date($('#start_date').datepicker('getDate'));
     let endDate = new Date($('#end_date').datepicker('getDate'));
+
+    // Subtract the dates and convert the result from milliseconds to days
     let stayLength = (endDate - startDate) / (1000 * 60 * 60 * 24);
+    dayPlural = stayLength === 1 ? "day" : "days";
 
-    if (stayLength === 1) {
-        dayPlural = "day";
-    } else {
-        dayPlural = "days";
-    }
-
+    // A pointless but nice touch
     const cardFooter = $("#date-select");
     cardFooter.html(`
     You have chosen to stay for ${stayLength} ${dayPlural}.
     `);
 }
 
+/**
+ * Initializes the Booking Widget
+ */
 const initializeWidget = () => {
-    console.log("\nInitiating Widget...\n");
     initializeDatePickers();
 
     $("#submit-button").on("click", () => {
         let start_date = $("#start_date").val();
         let end_date = $("#end_date").val();
+
+        // Get the value of the radio button that is currently checked or "active"
         let radioValue = $("input[name='btnradio']:checked").attr("id");
 
         buildShell(start_date, end_date, radioValue);
     });
 };
 
+/**
+ * Builds the shell of the booking widget
+ * @param start_date - The start date of the user's stay
+ * @param end_date - The end date of the user's stay
+ * @param radioValue - The value of the radio button that is currently checked
+ */
 const buildShell = (start_date, end_date, radioValue) => {
     const resultsDiv = $("#results");
 
@@ -201,14 +294,15 @@ const buildShell = (start_date, end_date, radioValue) => {
     // Subtract the dates and convert the result from milliseconds to days
     let stayLength = (endDate - startDate) / (1000 * 60 * 60 * 24);
 
-    let dayPlural = stayLength === 1 ? "day" : "days";
+    // A pointless but nice touch
     let roomPlural = userAmountOfRooms === 1 ? "room" : "rooms";
+    dayPlural = stayLength === 1 ? "day" : "days";
 
 
     resultsDiv.html(`
-    <p>You have chosen to stay for <span class="fw-bold">${stayLength} ${dayPlural}</span>.</p>
-    <p> We appreciate your business and hope you accept our Leader the <span class="fw-bold">Holy Lobster</span>.</p>
-    <p id="room-type-results"></p>
+        <p>You have chosen to stay for <span class="fw-bold">${stayLength} ${dayPlural}</span>.</p>
+        <p> We appreciate your business and hope you accept our Leader the <span class="fw-bold">Holy Lobster</span>.</p>
+        <p id="room-type-results"></p>
     `);
 
     $("#results").hide().fadeIn(1000);
@@ -323,6 +417,7 @@ const buildShell = (start_date, end_date, radioValue) => {
                 </div>
             `);
 
+                // Notify the user if there are no rooms left
                 if (amountOfRooms === 0) {
                     $("#notify-user").html(`
                         <p class="text-danger">We are sorry, but there are no rooms left for the <span class="fw-bold">Standard Package</span>.</p>
@@ -554,6 +649,7 @@ const buildShell = (start_date, end_date, radioValue) => {
             `);
             });
 
+            // Clear the modal when it is closed
             $("#booking-confirmation").on("show.bs.modal", () => {
                 amountOfRooms = 8;
                 userAmountOfRooms = 0;
@@ -739,14 +835,16 @@ const buildShell = (start_date, end_date, radioValue) => {
     checkBookingButtonUserLoggedIn();
 };
 
-$("#weather-button").on("click", () => {
-    refreshWeatherWidget();
-});
-
+/**
+ * Fetch the weather data from the OpenWeather API
+ */
 const refreshWeatherWidget = () => {
     getWeather().then(r => console.log("Weather Data Fetched Successfully!"));
 }
 
+/**
+ * Checks if the user is logged in and enables/disables the booking button accordingly
+ */
 const checkBookingButtonUserLoggedIn = () => {
     if (userLogin) {
         $("#book-standard").prop("disabled", false);
@@ -780,16 +878,22 @@ const hotelRooms = [{
 
 $("#which-room-button").on("click", (e) => {
     e.preventDefault();
+    // Scroll to the hotel rooms section
     $('html, body').animate({
         scrollTop: $("#section3").offset().top - 60
     });
 });
 
+/**
+ * Generates the hotel room cards from the hotelRooms array object
+ */
 const buildHotelRooms = () => {
     const hotelRoomsContainer = $('#section3-room-description');
 
     hotelRooms.forEach(room => {
+        // Replace spaces with dashes and convert the title to lowercase for a unique ID
         let roomTitle = room.title.replace(/\s/g, '-').toLowerCase();
+
         let cardHtml = `
             <div class="card mb-5 shadow-lg" id="${roomTitle}-card">
                 <div class="card-body">
@@ -807,49 +911,18 @@ const buildHotelRooms = () => {
                 </div>
             </div>
         `;
+
         hotelRoomsContainer.append(cardHtml);
     });
 
     $('.book-button').on('click', function (event) {
-        console.log(`Button clicked: ${event.id}`);
         event.preventDefault();
 
+        // Scroll to the booking widget
         $('html, body').animate({
             scrollTop: $("#section2").offset().top
         });
     });
-}
-
-const clearInvalidInputs = () => {
-    const $firstName = $('#first-name');
-    if (!/^[A-Za-z]+$/.test($firstName.val())) {
-        $firstName.val('');
-    }
-
-    const $lastName = $('#last-name');
-    if (!/^[A-Za-z]+$/.test($lastName.val())) {
-        $lastName.val('');
-    }
-
-    const $phoneNumber = $('#phone-number');
-    if (!/^(?:\d{3}-\d{3}-\d{4}|\d{10}|\d{3} \d{3} \d{4})$/.test($phoneNumber.val())) {
-        $phoneNumber.val('');
-    }
-
-    const $email = $('#email');
-    if (!/[^@\s]+@[^@\s]+\.[^@\s]+/.test($email.val())) {
-        $email.val('');
-    }
-
-    const $age = $('#age');
-    if ($age.val() < 0 || $age.val() > 120) {
-        $age.val('');
-    }
-
-    const $postalCode = $('#postal-code');
-    if (!/^[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d$/.test($postalCode.val())) {
-        $postalCode.val('');
-    }
 }
 
 buildHotelRooms();
