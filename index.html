@@ -4,8 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Château de Mona Liséa</title>
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Dancing+Script&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
@@ -14,7 +19,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Login</h5>
+                <h5 class="modal-title">Register With Château de Mona Liséa</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -143,7 +148,7 @@
             <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
                  aria-labelledby="offcanvasDarkNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Dark offcanvas</h5>
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Hotel Menu</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                             aria-label="Close"></button>
                 </div>
@@ -153,7 +158,7 @@
                             <a class="nav-link active" aria-current="page" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <button class="btn btn-outline-light" id="login-button">Login</button>
+                            <button class="btn btn-outline-light" id="login-button">Register</button>
                         </li>
                     </ul>
                     <div id="user-profile">
@@ -193,16 +198,21 @@
                 </div>
             </div>
             <!-- widget -->
-            <div class="col-md-8 position-relative">
-                <!-- widget goes here for openweather -->
+            <div class="col-md-8 position-absolute text-center animate__animated animate__headShake animate__infinite animate__slower" id="weather-widget" style="bottom: 0; right: 0;">
+                <div class="row justify-content-center align-items-center">
+                <p>The Current Weather</p>
+                <p><span id="temperature"></span> <span id="weather-icon"></span> <span id="weather"></span></p>
+                <button class="btn btn-light mb-2 w-50" id="weather-button">Refresh</button>
+                </div>
             </div>
         </div>
         <!-- section 2 -->
-        <div class="row justify-content-center align-items-center vh-100" id="section2">
+        <div class="row justify-content-center align-items-center" id="section2">
             <video autoplay loop muted id="section2-vid" class="object-fit-fill m-0 p-0">
                 <source src="static/vid/pool.mp4" type="video/mp4">
             </video>
             <!-- response -->
+            <div class="row d-flex justify-content-center align-items-center" id="section2-content">
             <div class="col-md mb-5 text-center" id="results-response">
                 <h1>Please Book Here</h1>
                 <p>
@@ -254,15 +264,16 @@
                     </div>
                 </div>
             </div>
+            </div>
         </div>
         <!-- section 3 -->
-        <div class="row justify-content-center align-items-center vh-100" id="section3">
+        <div class="row justify-content-center align-items-center" id="section3">
             <video autoplay loop muted id="section3-vid" class="object-fit-fill m-0 p-0">
                 <source src="static/vid/clouds.mp4" type="video/mp4">
             </video>
-            <div class="row d-flex justify-content-center align-items-center">
-                <div class="col-md-4 text-center" id="section3-img">
-                    <div id="hotel-carousel" class="carousel slide mb-5" data-bs-ride="carousel">
+            <div class="row d-flex justify-content-center align-items-center" id="section3-content">
+                <div class="col text-center" id="section3-img">
+                    <div id="hotel-carousel" class="carousel slide mb-5 mt-3" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img src="static/img/random/hotel.webp" class="d-block w-100" alt="room">
@@ -284,7 +295,7 @@
                     </div>
 
                 </div>
-                <div class="col-md-4 text-center" id="section3-room-description">
+                <div class="col text-center mt-5" id="section3-room-description">
                     <!-- rooms go here -->
                 </div>
             </div>

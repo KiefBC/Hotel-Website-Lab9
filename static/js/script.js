@@ -5,12 +5,14 @@ const hotelName = "Château de Mona Liséa";
 $("#login-button").on("click", (e) => {
     e.preventDefault();
     // if the text is login, show the modal else log the user out
-    if ($("#login-button").text() === "Login") {
+    if ($("#login-button").text() === "Register") {
         $("#login-modal").modal("show");
     } else {
-        $("#login-button").text("Login").removeClass("btn-danger").addClass("btn-outline-light");
+        $("#login-button").text("Register").removeClass("btn-danger").addClass("btn-outline-light");
         $("#greet-user").html("");
         $("#user-profile").html("");
+        userLogin = false;
+        checkBookingButtonUserLoggedIn();
     }
 });
 $("#register-submit-btn").on("click", (event) => {
@@ -29,6 +31,7 @@ $("#register-submit-btn").on("click", (event) => {
         buildUserProfile($firstName, $lastName, $age, $phoneNumber, $postalCode, $email);
         $("#login-button").text("Logout").removeClass("btn-outline-light").addClass("btn-danger");
         clearFormInputs();
+        checkBookingButtonUserLoggedIn();
     }
 });
 
@@ -92,6 +95,33 @@ const clearFormInputs = () => {
     $('#postal-code').val('');
 
 }
+//</editor-fold>
+
+//<editor-fold desc="Weather Widget">
+const apiKey = `e1be3967c5f2d60263adc1ed3907d170`;
+const lat = 17.607788;
+const lon = 8.081666;
+const apiBaseUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+
+const getWeather = async () => {
+    const response = await fetch(apiBaseUrl);
+    const data = await response.json();
+    console.log(data);
+
+    const temp = data.main.temp;
+    const tempC = Math.round(temp - 273.15);
+    const weatherIcon = data.weather[0].icon;
+    const weatherDescription = data.weather[0].description;
+
+    //capitalize every word in the description
+    const weatherDescriptionCapitalized = weatherDescription.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+
+    $("#temperature").html(`${tempC}\u00B0`);
+    $("#weather-icon").html(`<img src="https://openweathermap.org/img/w/${weatherIcon}.png" alt="Weather icon">`);
+    $("#weather").html(`${weatherDescriptionCapitalized}`);
+};
+
+getWeather().then(r => console.log("Weather Data Fetched Successfully!"));
 //</editor-fold>
 
 //<editor-fold desc="Section 2">
@@ -181,6 +211,8 @@ const buildShell = (start_date, end_date, radioValue) => {
     <p id="room-type-results"></p>
     `);
 
+    $("#results").hide().fadeIn(1000);
+
     totalAvailableRooms = 9;
     amountOfRooms = 8;
     userAmountOfRooms = 1;
@@ -202,7 +234,13 @@ const buildShell = (start_date, end_date, radioValue) => {
                 </ul>
             </ul>
             <button class="btn btn-light mt-5" id="book-standard">BOOK ROOM NOW!</button>
+            <div id="booking-response">
+                <!-- notify the user here -->
+            </div>
         `);
+
+        $("#room-type-results").hide();
+        $("#room-type-results").fadeIn(1000);
 
         cost = 100;
 
@@ -216,7 +254,7 @@ const buildShell = (start_date, end_date, radioValue) => {
                     <div class="modal-body">
                         <p>There are currently <span class="fw-bold" id="room-amount-left">${amountOfRooms}</span> rooms available for the Standard Package.</p>
                         <p>You have chosen to stay for: <span class="fw-bold">${stayLength} ${dayPlural}</span>!</p>
-                        <p>You want a total of: <span class="fw-bold" id="user-room-amount">${userAmountOfRooms} ${roomPlural}</span>.</p>
+                        <p>You want a total of: <span class="fw-bold" id="user-room-amount">${userAmountOfRooms}</span> <span class="fw-bolder">${roomPlural}</span>.</p>
                         <p>The total cost for <span class="fw-bold" id="user-room-cost">${userAmountOfRooms}</span> is: <span class="fw-bold" id="total-room-cost">${userAmountOfRooms * cost}</span></p>
                         <p><span class="fw-bold">Would you like to book a room for the Standard Package?</span></p>
                         <div class="text-center mb-3">
@@ -366,8 +404,14 @@ const buildShell = (start_date, end_date, radioValue) => {
                     <li>Burger King</li>
                 </ul>
             </ul>
-            <button class="btn btn-outline-dark mt-5" id="book-standard">BOOK ROOM NOW!</button>
+            <button class="btn btn-light mt-5" id="book-standard">BOOK ROOM NOW!</button>
+            <div id="booking-response">
+                <!-- notify the user here -->
+            </div>
         `);
+
+        $("#room-type-results").hide();
+        $("#room-type-results").fadeIn(1000);
 
         cost = 200;
 
@@ -381,7 +425,7 @@ const buildShell = (start_date, end_date, radioValue) => {
                     <div class="modal-body">
                         <p>There are currently <span class="fw-bold" id="room-amount-left">${amountOfRooms}</span> rooms available for the Standard Package.</p>
                         <p>You have chosen to stay for: <span class="fw-bold">${stayLength} ${dayPlural}</span>!</p>
-                        <p>You want a total of: <span class="fw-bold" id="user-room-amount">${userAmountOfRooms} ${roomPlural}</span>.</p>
+                        <p>You want a total of: <span class="fw-bold" id="user-room-amount">${userAmountOfRooms}</span> <span class="fw-bolder">${roomPlural}</span>.</p>
                         <p>The total cost for <span class="fw-bold" id="user-room-cost">${userAmountOfRooms}</span> is: <span class="fw-bold" id="total-room-cost">${userAmountOfRooms * cost}</span></p>
                         <p><span class="fw-bold">Would you like to book a room for the Standard Package?</span></p>
                         <div class="text-center mb-3">
@@ -531,8 +575,14 @@ const buildShell = (start_date, end_date, radioValue) => {
                     <li>Burger King</li>
                 </ul>
             </ul>
-            <button class="btn btn-outline-dark mt-5" id="book-standard">BOOK ROOM NOW!</button>
+            <button class="btn btn-light mt-5" id="book-standard">BOOK ROOM NOW!</button>
+            <div id="booking-response">
+                <!-- notify the user here -->
+            </div>
         `);
+
+        $("#room-type-results").hide();
+        $("#room-type-results").fadeIn(1000);
 
         cost = 300;
 
@@ -546,7 +596,7 @@ const buildShell = (start_date, end_date, radioValue) => {
                     <div class="modal-body">
                         <p>There are currently <span class="fw-bold" id="room-amount-left">${amountOfRooms}</span> rooms available for the Standard Package.</p>
                         <p>You have chosen to stay for: <span class="fw-bold">${stayLength} ${dayPlural}</span>!</p>
-                        <p>You want a total of: <span class="fw-bold" id="user-room-amount">${userAmountOfRooms} ${roomPlural}</span>.</p>
+                        <p>You want a total of: <span class="fw-bold" id="user-room-amount">${userAmountOfRooms}</span> <span class="fw-bolder">${roomPlural}</span>.</p>
                         <p>The total cost for <span class="fw-bold" id="user-room-cost">${userAmountOfRooms}</span> is: <span class="fw-bold" id="total-room-cost">${userAmountOfRooms * cost}</span></p>
                         <p><span class="fw-bold">Would you like to book a room for the Standard Package?</span></p>
                         <div class="text-center mb-3">
@@ -611,6 +661,9 @@ const buildShell = (start_date, end_date, radioValue) => {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                    <div id="booking-response">
+                    <!-- notify the user here -->
                     </div>
                 </div>
             `);
@@ -682,8 +735,27 @@ const buildShell = (start_date, end_date, radioValue) => {
             });
         });
     }
+
+    checkBookingButtonUserLoggedIn();
 };
 
+$("#weather-button").on("click", () => {
+    refreshWeatherWidget();
+});
+
+const refreshWeatherWidget = () => {
+    getWeather().then(r => console.log("Weather Data Fetched Successfully!"));
+}
+
+const checkBookingButtonUserLoggedIn = () => {
+    if (userLogin) {
+        $("#book-standard").prop("disabled", false);
+        $("#booking-response").html(``).fadeOut(1000);
+    } else {
+        $("#book-standard").prop("disabled", true);
+        $("#booking-response").html(`<p class="text-center text-danger fw-bolder mt-5">You must be logged in to book a room!</p`).hide().fadeIn(1000);
+    }
+};
 
 initializeWidget();
 //</editor-fold>
